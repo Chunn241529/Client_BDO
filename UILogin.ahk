@@ -40,7 +40,7 @@ Login:
     Gui, Submit, NoHide ; Lấy giá trị từ giao diện
 
     ; Đường dẫn tới file .bat có sẵn
-    filePath := "launcher.bat"
+    filePath := "Login.bat"
 
     ; Đọc nội dung file .bat
     FileRead, fileContent, %filePath%
