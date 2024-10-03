@@ -32,6 +32,12 @@ Gui, Add, Button, x1000 y620 w150 h50 gRegister BackgroundTrans, Đăng ký
 ; Thêm nút Login
 Gui, Add, Button, x1200 y620 w150 h50 gLogin BackgroundTrans, Đăng nhập
 
+; Thêm nút Update game
+Gui, Add, Button, x1000 y680 w1500 h50 gUpdateGame BackgroundTrans, Cập nhật game
+
+; Thêm Progress Bar để theo dõi tiến trình
+Gui, Add, Progress, vProgressBar x1000 y740 w350 h20 cGreen BackgroundTrans, 0
+
 ; Đọc thông tin đăng nhập từ file
 FileRead, loginData, ./Log/Remember_Login.txt
 if (ErrorLevel)
@@ -93,14 +99,42 @@ Login:
         FileDelete, login.txt ; Xóa file login.txt nếu không được chọn
     }
 
-    ; SoundPlay, % A_ScriptDir . ".\Img\0927.MP3", Wait
-
     ; Chạy file .bat
     Run, %filePath%
 
-    ; Tắt AutoHotkey sau khi đăng nhập
-    ExitApp
+; Tắt AutoHotkey sau khi đăng nhập
+ExitApp
+Return
+
+UpdateGame:
+    ; Thiết lập Progress Bar
+    GuiControl, , ProgressBar, 0 ; Đặt giá trị tiến trình về 0
+    Gui, Show
+
+    ; Thực hiện git pull từ thư mục riêng
+    gitPullPath := ".\Client_BDO\bdo_setting" ; Đường dẫn tới thư mục git
+    Run, %ComSpec% /C "cd /d %gitPullPath% && git pull", , Hide
+
+    ; Cập nhật Progress Bar
+    GuiControl, , ProgressBar, 50 ; Cập nhật tiến trình (ví dụ 50%)
+    Sleep, 1000 ; Thời gian chờ để dễ thấy
+
+    ; Sao chép tệp vào thư mục chính của game
+    gamePath := ".\Client_BDO" ; Đường dẫn tới thư mục game chính
+    FileCopy, %gitPullPath%\*.*, %gamePath%, 1 ; 1 để ghi đè tệp
+
+    ; Cập nhật Progress Bar
+    GuiControl, , ProgressBar, 100 ; Cập nhật tiến trình đến 100%
+    Sleep, 1000 ; Thời gian chờ để dễ thấy
+
+    ; Reload lại UI
+    Gui, Destroy ; Hủy GUI hiện tại
+    GoSub, ShowGUI ; Gọi lại hàm tạo lại giao diện
+Return
+
+ShowGUI:
+    Run, .\BlackDesert.exe
 Return
 
 GuiClose:
-    ExitApp
+ExitApp
