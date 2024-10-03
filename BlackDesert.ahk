@@ -5,7 +5,7 @@ Gui, Color, 0x2E2E2E ; Đặt màu nền
 Gui, Show, w1600 h900, Black Desert
 
 ; Đường dẫn tới hình nền
-gifPath := A_ScriptDir . "\Img\1.png" ; Đường dẫn tới file hình ảnh
+gifPath := A_ScriptDir . "\Img\777jihad_by_isleeyin_di91c59.png" ; Đường dẫn tới file hình ảnh
 
 ; Thêm tiêu đề và slogan sau khi thêm hình nền
 Gui, Font, s50 Bold, Arial
@@ -33,7 +33,7 @@ Gui, Add, Button, x1000 y620 w150 h50 gRegister BackgroundTrans, Đăng ký
 Gui, Add, Button, x1200 y620 w150 h50 gLogin BackgroundTrans, Đăng nhập
 
 ; Thêm nút Update game
-Gui, Add, Button, x1000 y680 w1050 h50 gUpdateGame BackgroundTrans, Cập nhật game
+Gui, Add, Button, x1100 y680 w150 h50 gUpdateGame BackgroundTrans, Cập nhật game
 
 ; Thêm Progress Bar để theo dõi tiến trình
 Gui, Add, Progress, vProgressBar x1000 y740 w350 h20 cGreen BackgroundTrans, 0
@@ -111,21 +111,32 @@ UpdateGame:
     GuiControl, , ProgressBar, 0 ; Đặt giá trị tiến trình về 0
     Gui, Show
 
-    ; Thực hiện git pull từ thư mục riêng
-    gitPullPath := ".\Client_BDO\bdo_setting\" ; Đường dẫn tới thư mục git
-    Run, %ComSpec% /C "cd /d %gitPullPath% && git pull", , Hide
+    ; Đường dẫn tới tệp zip
+    zipFilePath := ".\bdo_setting\bdo_setting.zip" ; Đường dẫn tới tệp zip
+    targetPath := "..\Client_BDO\bdo_setting.zip" ; Đường dẫn tới nơi lưu tệp zip
+
+    ; Kiểm tra xem tệp zip có tồn tại không
+    if !FileExist(zipFilePath) {
+        MsgBox, Tệp zip không tồn tại: %zipFilePath%
+        Return
+    }
+
+    ; Sao chép tệp zip đến thư mục đích
+    FileCopy, %zipFilePath%, %targetPath%, 1 ; 1 để ghi đè tệp nếu đã tồn tại
 
     ; Cập nhật Progress Bar
     GuiControl, , ProgressBar, 50 ; Cập nhật tiến trình (ví dụ 50%)
     Sleep, 1000 ; Thời gian chờ để dễ thấy
 
-    ; Sao chép tệp vào thư mục chính của game
-    gamePath := ".\Client_BDO\" ; Đường dẫn tới thư mục game chính
-    FileCopy, %gitPullPath%\*.*, %gamePath%, 1 ; 1 để ghi đè tệp
+    ; Giải nén tệp zip vào thư mục đích
+    Run, %ComSpec% /C "powershell -command ""Expand-Archive -Path '%targetPath%' -DestinationPath '..\Client_BDO' -Force""", , Hide
 
     ; Cập nhật Progress Bar
     GuiControl, , ProgressBar, 100 ; Cập nhật tiến trình đến 100%
     Sleep, 1000 ; Thời gian chờ để dễ thấy
+
+    ; Xóa tệp zip sau khi giải nén
+    FileDelete, %targetPath%
 
     ; Reload lại UI
     Gui, Destroy ; Hủy GUI hiện tại
@@ -133,7 +144,7 @@ UpdateGame:
 Return
 
 ShowGUI:
-    Run, .\BlackDesert.exe
+    Run, .\BlackDesert.ahk
 Return
 
 GuiClose:
