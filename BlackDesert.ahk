@@ -33,7 +33,7 @@ Gui, Add, Button, x1000 y620 w150 h50 gRegister BackgroundTrans, Đăng ký
 Gui, Add, Button, x1200 y620 w150 h50 gLogin BackgroundTrans, Đăng nhập
 
 ; Thêm nút Update game
-Gui, Add, Button, x1000 y680 w1500 h50 gUpdateGame BackgroundTrans, Cập nhật game
+Gui, Add, Button, x1000 y680 w1050 h50 gUpdateGame BackgroundTrans, Cập nhật game
 
 ; Thêm Progress Bar để theo dõi tiến trình
 Gui, Add, Progress, vProgressBar x1000 y740 w350 h20 cGreen BackgroundTrans, 0
