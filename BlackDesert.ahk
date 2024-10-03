@@ -5,7 +5,7 @@ Gui, Color, 0x2E2E2E ; Đặt màu nền
 Gui, Show, w1600 h900, Black Desert
 
 ; Đường dẫn tới hình nền
-gifPath := A_ScriptDir . "\Img\777jihad_by_isleeyin_di91c59.png" ; Đường dẫn tới file hình ảnh
+gifPath := A_ScriptDir . "\Img\1.png" ; Đường dẫn tới file hình ảnh
 
 ; Thêm tiêu đề và slogan sau khi thêm hình nền
 Gui, Font, s50 Bold, Arial
@@ -112,7 +112,7 @@ UpdateGame:
     Gui, Show
 
     ; Thực hiện git pull từ thư mục riêng
-    gitPullPath := ".\Client_BDO\bdo_setting" ; Đường dẫn tới thư mục git
+    gitPullPath := ".\Client_BDO\bdo_setting\" ; Đường dẫn tới thư mục git
     Run, %ComSpec% /C "cd /d %gitPullPath% && git pull", , Hide
 
     ; Cập nhật Progress Bar
@@ -120,7 +120,7 @@ UpdateGame:
     Sleep, 1000 ; Thời gian chờ để dễ thấy
 
     ; Sao chép tệp vào thư mục chính của game
-    gamePath := ".\Client_BDO" ; Đường dẫn tới thư mục game chính
+    gamePath := ".\Client_BDO\" ; Đường dẫn tới thư mục game chính
     FileCopy, %gitPullPath%\*.*, %gamePath%, 1 ; 1 để ghi đè tệp
 
     ; Cập nhật Progress Bar
