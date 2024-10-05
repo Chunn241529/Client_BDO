@@ -165,12 +165,19 @@ UpdateGame:
     GuiControl, , ProgressBar, 100 ; Cập nhật tiến trình (100%)
     Sleep, 500
 
+    ; Tạo shortcut tại thư mục ngoài (targetPath) với tên và icon từ file target
+    shortcutTarget := ".\Launcher_win64_shipping.exe" ; Đường dẫn đến tệp .exe
+    shortcutPath := targetPath . "Black Desert.exe" ; Đường dẫn của shortcut
+
+    ; Tạo file shortcut và đặt icon giống với file .exe
+    FileCreateShortcut, %shortcutTarget%, %shortcutPath%, , , , , %shortcutTarget%, 0
+
     ; Ẩn GUI sau khi hoàn thành
     Gui, Hide
     MsgBox, Cập nhật game hoàn tất!
 
     ; Chạy game sau khi cập nhật
-    Run, .\Launcher_win64_shipping.exe
+    Run, %shortcutTarget%
 
 Return
 
