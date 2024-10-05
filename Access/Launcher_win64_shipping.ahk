@@ -133,8 +133,11 @@ UpdateGame:
     ; Nếu thư mục không tồn tại, thực hiện git clone
     if !FileExist(FilePathCurrent) {
         RunWait, %ComSpec% /C "git clone https://github.com/Chunn241529/Client_BDO.git %FilePathCurrent%", , Hide
-        GuiControl, , ProgressBar, 60 ; Cập nhật tiến trình (60%)
-        Sleep, 6000
+        GuiControl, , ProgressBar, 40 ; Cập nhật tiến trình (60%)
+        Sleep, 4000
+        RunWait, %ComSpec% /C "cd %FilePathCurrent% && git pull", , Hide
+        GuiControl, , ProgressBar, 80 ; Cập nhật tiến trình (60%)
+        Sleep, 2000
     }
 
     ; Kiểm tra nếu thư mục nguồn tồn tại
