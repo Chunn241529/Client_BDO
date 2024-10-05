@@ -123,54 +123,32 @@ UpdateGame:
     Gui, Show
 
     ; Đường dẫn tới thư mục nơi git clone hoặc git pull sẽ diễn ra
-    clonePath := "..\bdo_setting\" ; Đường dẫn tới thư mục đích
-    ; Đường dẫn tới tệp zip
-    zipFilePath := "..\bdo_setting\Client_BDO.zip" ; Đường dẫn tới tệp zip
-    targetPath := "..\Client_BDO.zip" ; Đường dẫn tới nơi lưu tệp zip
+    clonePath := "..\" ; Đường dẫn tới thư mục đích
+
+    ; Cập nhật Progress Bar
+    GuiControl, , ProgressBar, 10 ; Cập nhật tiến trình (10%)
+    Sleep, 500
 
     ; Kiểm tra xem thư mục bdo_setting có tồn tại không
     if (FileExist(clonePath)) {
         ; Nếu thư mục tồn tại, thực hiện git pull
-        Run, %ComSpec% /C "cd /d %clonePath% && git pull", , Hide
-        Sleep, 2000 ; Chờ một chút để đảm bảo git pull hoàn tất
+        RunWait, %ComSpec% /C "cd /d %clonePath% && git pull", , Hide
     } else {
         ; Nếu thư mục không tồn tại, thực hiện git clone
-        Run, %ComSpec% /C "git clone https://github.com/Chunn241529/Client_BDO.git %clonePath%", , Hide
-        Sleep, 8000 ; Chờ một chút để đảm bảo git clone hoàn tất
-    }
-
-    ; Kiểm tra xem tệp zip có tồn tại không
-    if !FileExist(zipFilePath) {
-        MsgBox, Tệp zip không tồn tại: %zipFilePath%
-        Return
-    }
-
-    ; Sao chép tệp zip đến thư mục đích
-    FileCopy, %zipFilePath%, %targetPath%, 1 ; 1 để ghi đè tệp nếu đã tồn tại
-
-    ; Cập nhật Progress Bar
-    GuiControl, , ProgressBar, 25 ; Cập nhật tiến trình (25%)
-    Sleep, 1000 ; Thời gian chờ để dễ thấy
-
-    ; Giải nén tệp zip vào thư mục Client_BDO
-    Run, %ComSpec% /C "powershell -command ""Expand-Archive -Path '%targetPath%' -DestinationPath '..\' -Force""", , Hide
-
-    ; Giải nén không trả về kết quả ngay lập tức, cần chờ cho đến khi hoàn tất
-    Loop {
-        Sleep, 500 ; Chờ nửa giây để kiểm tra
-        ; Kiểm tra nếu thư mục đã có các tệp mới
-        if (FileExist("..\*.*")) {
-            break ; Nếu tệp tồn tại, thoát vòng lặp
-        }
+        RunWait, %ComSpec% /C "git clone https://github.com/Chunn241529/Client_BDO.git %clonePath%", , Hide
+        GuiControl, , ProgressBar, 59 ; Cập nhật tiến trình (10%)
+        Sleep, 500
     }
 
     ; Cập nhật Progress Bar
     GuiControl, , ProgressBar, 100 ; Cập nhật tiến trình (100%)
-    Sleep, 1000 ; Chờ thêm một chút trước khi đóng GUI
-    Gui, Hide ; Ẩn GUI sau khi hoàn thành
-    MsgBox, Cập nhật game hoàn tất! ; Hiển thị thông báo hoàn thành
-    FileDelete, %targetPath%
+    Sleep, 500
 
+    ; Ẩn GUI sau khi hoàn thành
+    Gui, Hide
+    MsgBox, Cập nhật game hoàn tất!
+
+    ; Chạy game sau khi cập nhật
     Run, Launcher_win64_shipping.exe
 Return
 
