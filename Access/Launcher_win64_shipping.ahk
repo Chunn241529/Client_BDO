@@ -98,7 +98,7 @@ Login:
     FileAppend, SET account=%Username%`n, %filePath%
     FileAppend, SET password=%Password%`n, %filePath%
     FileAppend, REM <EDIT YOUR LOGIN INFORMATION HERE>`n, %filePath%
-    FileAppend, cd bin64`n, %filePath%
+    FileAppend, cd ..\bin64`n, %filePath%
 
     ; Đảm bảo rằng dòng lệnh start được ghi đúng
     startCommand := "start BlackDesert64.exe " . Username . "," . Password

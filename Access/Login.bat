@@ -1,7 +1,7 @@
 @echo off
 REM <EDIT YOUR LOGIN INFORMATION HERE>
-SET account=ninja1
-SET password=ninja1
+SET account=VuongTrung
+SET password=
 REM <EDIT YOUR LOGIN INFORMATION HERE>
-cd bin64
-start BlackDesert64.exe ninja1,ninja1
+cd ..\bin64
+start BlackDesert64.exe VuongTrung,
