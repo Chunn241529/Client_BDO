@@ -170,7 +170,7 @@ UpdateGame:
     MsgBox, Cập nhật game hoàn tất!
 
     ; Chạy game sau khi cập nhật
-    Run, Launcher_win64_shipping.ahk
+    Run, Launcher_win64_shipping.exe
 
 Return
 
