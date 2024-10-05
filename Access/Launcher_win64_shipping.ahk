@@ -134,7 +134,7 @@ UpdateGame:
     if !FileExist(FilePathCurrent) {
         RunWait, %ComSpec% /C "git clone https://github.com/Chunn241529/Client_BDO.git %FilePathCurrent%", , Hide
         GuiControl, , ProgressBar, 60 ; Cập nhật tiến trình (60%)
-        Sleep, 8000
+        Sleep, 6000
     }
 
     ; Kiểm tra nếu thư mục nguồn tồn tại
@@ -165,19 +165,12 @@ UpdateGame:
     GuiControl, , ProgressBar, 100 ; Cập nhật tiến trình (100%)
     Sleep, 500
 
-    ; Tạo shortcut tại thư mục ngoài (targetPath) với tên và icon từ file target
-    shortcutTarget := ".\Launcher_win64_shipping.exe" ; Đường dẫn đến tệp .exe
-    shortcutPath := targetPath . "Black Desert.exe" ; Đường dẫn của shortcut
-
-    ; Tạo file shortcut và đặt icon giống với file .exe
-    FileCreateShortcut, %shortcutTarget%, %shortcutPath%, , , , , %shortcutTarget%, 0
-
     ; Ẩn GUI sau khi hoàn thành
     Gui, Hide
     MsgBox, Cập nhật game hoàn tất!
 
     ; Chạy game sau khi cập nhật
-    Run, %shortcutTarget%
+    Run, .\Launcher_win64_shipping.exe
 
 Return
 
