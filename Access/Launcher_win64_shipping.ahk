@@ -123,21 +123,42 @@ UpdateGame:
     Gui, Show
 
     ; Đường dẫn tới thư mục nơi git clone hoặc git pull sẽ diễn ra
-    clonePath := "..\" ; Đường dẫn tới thư mục đích
+    FilePathCurrent := "..\Client_BDO\" ; Đường dẫn tới thư mục nguồn
+    targetPath := "..\" ; Đường dẫn tới nơi lưu (nơi bạn muốn sao chép tệp)
 
     ; Cập nhật Progress Bar
     GuiControl, , ProgressBar, 10 ; Cập nhật tiến trình (10%)
     Sleep, 500
 
-    ; Kiểm tra xem thư mục bdo_setting có tồn tại không
-    if (FileExist(clonePath)) {
-        ; Nếu thư mục tồn tại, thực hiện git pull
-        RunWait, %ComSpec% /C "cd /d %clonePath% && git pull", , Hide
+    ; Nếu thư mục không tồn tại, thực hiện git clone
+    if !FileExist(FilePathCurrent) {
+        RunWait, %ComSpec% /C "git clone https://github.com/Chunn241529/Client_BDO.git %FilePathCurrent%", , Hide
+        GuiControl, , ProgressBar, 60 ; Cập nhật tiến trình (60%)
+        Sleep, 8000
+    }
+
+    ; Kiểm tra nếu thư mục nguồn tồn tại
+    if (FileExist(FilePathCurrent)) {
+        ; Sao chép tất cả các tệp và thư mục con từ FilePathCurrent ra ngoài targetPath
+        Loop, Files, %FilePathCurrent%\*.*, R ; Duyệt qua tất cả tệp và thư mục con
+        {
+            ; Tạo lại đường dẫn thư mục nếu cần thiết
+            IfInString, A_LoopFileAttrib, D ; Kiểm tra nếu là thư mục
+            {
+                FileCreateDir, %targetPath%%A_LoopFileFullPath%\ ; Tạo thư mục mới
+            }
+            else
+            {
+                ; Sao chép từng tệp
+                FileMove, %A_LoopFileFullPath%, %targetPath%%A_LoopFileFullPath%
+            }
+        }
+
+        ; Xóa thư mục nguồn sau khi sao chép xong
+        FileRemoveDir, %FilePathCurrent%, 1 ; Tham số "1" để xóa cả nội dung bên trong
     } else {
-        ; Nếu thư mục không tồn tại, thực hiện git clone
-        RunWait, %ComSpec% /C "git clone https://github.com/Chunn241529/Client_BDO.git %clonePath%", , Hide
-        GuiControl, , ProgressBar, 59 ; Cập nhật tiến trình (10%)
-        Sleep, 500
+        MsgBox, Cập nhật thất bại.
+        Return
     }
 
     ; Cập nhật Progress Bar
@@ -149,7 +170,8 @@ UpdateGame:
     MsgBox, Cập nhật game hoàn tất!
 
     ; Chạy game sau khi cập nhật
-    Run, Launcher_win64_shipping.exe
+    Run, Launcher_win64_shipping.ahk
+
 Return
 
 ; Xử lý khi đóng GUI
