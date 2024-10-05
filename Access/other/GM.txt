@@ -1,0 +1,114 @@
+﻿Command						Mô tả
+//pc sync						# Đồng bộ
+//weather [close/open]				Bật/tắt hệ thống thời tiết
+//pc heal						# Chữa lành - phục hồi đầy máu
+//bag add 545 1					Phục hồi 200 năng lượng
+//pc nocd						# Không có thời gian hồi chiêu
+//quest complete [GroupID] [QuestID]		Hoàn thành nhiệm vụ [//quest complete 10 5]
+//pc setlevel [1-100]					# Đặt cấp độ
+//pc addskillpoints [số điểm]				# Tăng điểm kỹ năng
+//pc addlifeexp [loại sống] [kinh nghiệm]		# Tăng kinh nghiệm kỹ năng sống
+//pc addcash [số lượng tiền]				# Thêm tiền
+//pc ma						# Triệu hồi ngựa đến bên
+//pc ship						# Triệu hồi tàu, phải ở trong nước
+//pc openmap					# Mở toàn bộ bản đồ
+//pc addtitle [Id danh hiệu]				# Thêm danh hiệu
+//pc addallknowledges [1-5]				# Lấy toàn bộ kiến thức
+//pc addfitnessexp [loại sức khỏe] [kinh nghiệm]	# Tăng kinh nghiệm sức khỏe
+//pc addtendency [giá trị thuộc tính]			# Thêm thuộc tính thiên hướng
+//bag add 1 [số lượng]					# Tăng vàng
+//bag add 5  [số lượng]					# Tăng 1KG vàng khối
+//bag add 6 [số lượng]					# Tăng ngọc trai
+//bag add 7 [số lượng]					# Tăng quà - M tiền
+//bag add [Id vật phẩm] [số lượng] (Tùy chọn: [Cấp độ nâng cấp])	# Thêm vật phẩm vào túi
+//bag addtoplayer [tên người chơi] [Id vật phẩm] [số lượng] (Tùy chọn: [Cấp độ nâng cấp])	# Thêm vật phẩm vào túi của người chơi cụ thể
+//spawn add npcid [dialogindex] [actionindex]		# Gọi quái
+//tp town (Tùy chọn: [townId])				# Dịch chuyển đến khu vực chỉ định
+------------------------------------------------------------------------------------------------------------------
+Các lệnh khác						Mô tả
+//pc malevel [giá trị cấp độ]				# Đặt cấp độ ngựa
+//pc addmaexp [kinh nghiệm]				# Tăng kinh nghiệm ngựa
+//pc maskill						# Ngựa học một kỹ năng
+//pc resetma   					Đặt lại thuộc tính ngựa, tiêu tốn ngọc trai
+//pc addpet [kinh nghiệm]					# Tăng kinh nghiệm thú cưng
+//pc addexp [kinh nghiệm]					# Tăng kinh nghiệm
+//pc addskillexp [kinh nghiệm]				# Tăng kinh nghiệm kỹ năng
+//pc addexploreexp [nodeKey] [kinh nghiệm]		# Tăng kinh nghiệm khám phá????
+//pc addknowledge [cardId] [cấp độ thẻ: 1-5]		# Thêm kiến thức
+//pc setplayerlevel 1-100				# Đặt cấp độ người chơi
+//pc info						# Thông tin nhân vật
+//spawn killid npcid  (Tùy chọn: [dialogIndex])		# Giết quái cụ thể theo Id
+//spawn killnear [khoảng cách]				# Giết quái gần đó, tham số khoảng cách
+//spawn restartaisector				# Khởi động lại AI????
+//spawn shownear [phạm vi]				# Hiển thị quái gần đó
+//tp monster [npcId] (Tùy chọn: [dialogIndex])		# Dịch chuyển đến NPC
+//tp player [tên người chơi]				# Dịch chuyển đến người chơi
+//tp recall [tên người chơi]				# Triệu hồi người chơi
+//tp coord [x] [y] [z]					# Dịch chuyển đến tọa độ chỉ định
+//pc gmspeed 0-99					# Điều chỉnh tốc độ [bao gồm tốc độ tấn công]
+//pc boss next|now					# Thông tin làm mới boss
+//pc bossalert 0|5|15|30				# Thông báo làm mới boss
+//pc clearbuffs					# Xóa trạng thái
+//pc announce [văn bản]					# Đăng thông báo
+//pc kick [tên người chơi]				# Đá người chơi ra
+//pc giftonline [itemId] [số lượng] (Tùy chọn: [cấp độ phép thuật])	# Tặng quà
+//pc clearskilllist					# Xóa danh sách sát thủ
+//pc clearcooltime					# Làm mới thời gian hồi chiêu
+//pc clearwaypoint					# Điểm hành trình
+//pc fairy 0-100					# Dưới % máu, tự động uống thuốc
+//pc fairymp 0-100					# Dưới % mana, tự động uống thuốc
+//pc fairyskill					# Đặt lại kỹ năng tiên nữ
+//pc fixexporle					# Sửa chữa????
+//pc kms						# Tự sát
+//pc kmsma					# Giết ngựa
+//pc superma					# Triệu hồi ngựa siêu trong chuồng
+//pc petskill					# Đặt lại kỹ năng thú cưng
+//pc petskill2					# Đặt lại kỹ năng thú cưng
+//rescue						# Quay về làng mới
+//loc						# Thông tin vị trí
+---------------------------------------------------------------------------------------------------------------
+Các lệnh khác 2					Mô tả
+//pc addwp [số lượng wp]				# Không rõ: Tăng WP
+//pc addguildskillpoints				# Không rõ
+//pc addfailcount [số lượng]				# Không rõ: Tăng số lần thất bại
+//pc godmode					# Chế độ thần
+//pc use itemid					# Sử dụng một vật phẩm
+//pc debugmode					# Chế độ gỡ lỗi
+//pc debugdmg					# Gỡ lỗi dm
+----------------------------------------------------------------------------------------------------------
+//quest start GroupID QuestID				Bắt đầu nhiệm vụ [//quest start 10 5]
+//quest count					# Số lượng nhiệm vụ hiện tại
+//quest show my|public|hide|all				# Hiển thị tình trạng nhiệm vụ
+//quest startforce  GroupID QuestID			# Không rõ:
+//quest tp  GroupID QuestID				# Dịch chuyển đến nhiệm vụ
+//quest update step [số lượng]				# Cập nhật nhiệm vụ
+//quest update  【Groupld nhiệm vụ ID】【questid nhiệm vụ bước】【index】【số lượng】		Cập nhật nhiệm vụ  
+----------------------------------------------------------------------------------------------------------
+//channel ban channelid playname			# Cấm người chơi trong kênh
+//channel join channelid				# Tham gia kênh
+//channel leave					# Rời khỏi kênh
+//channel show					# Hiển thị kênh
+//channel moveto channelid				# Di chuyển đến kênh
+//channel readonly					# Khóa kênh
+----------------------------------------------------------------------------------------------------------
+//ban chat [tên nhân vật] [phút]			# Cấm người chơi trò chuyện
+//ban account [tên nhân vật] [tùy chọn phút]		# Cấm tài khoản
+//ban player [tên nhân vật] [phút]			# Cấm người chơi
+//ban ip [tên nhân vật] [phút]			# Cấm IP
+//ban hwid [tên nhân vật] [phút]			# Cấm hwid
+//ban jail [tên nhân vật] [phút]			# Người chơi vào tù
+//ban unban [tên nhân vật] [chat|jail|account|player|ip|hwid]	# Gỡ cấm
+----------------------------------------------------------------------------------------------------------
+//server version					# Phiên bản máy chủ
+//server online					# Số người online trên máy chủ
+//server gametime					# Thời gian chơi trên máy chủ
+----------------------------------------------------------------------------------------------------------
+//drop info						# Xem bộ lọc nhặt hiện tại
+//drop disable					# Vô hiệu hóa bộ lọc nhặt
+//drop enable					# Kích hoạt bộ lọc nhặt
+//drop enablelist					# Chưa thử nghiệm
+//drop equip 0-5					# Giữ chất lượng trang bị (1 trắng, 2 xanh, 3 xanh dương, 4 vàng, 5 cam)
+//drop filter					# Chưa thử nghiệm
+//drop enablelist 					# Kích hoạt bộ lọc vật phẩm chỉ định
+//drop disablelist					# Vô hiệu hóa bộ lọc nhặt vật phẩm chỉ định
+//drop add itemid					# (shift+nhấp chuột trái vào
